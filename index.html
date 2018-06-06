@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Id form validation</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>Id card validation form</h1>
+
+    <form novalidate>
+        <div id="input-group">
+
+            <label for="First name">firstname</label>
+            <input type="text" id="firstname"><br>
+            <span class="span-for-errors" id="errForFirstName">Please enter your preferred name as first name</span>
+
+        </div>
+
+        <div id="input-group">
+            <label for="Last Name">lastname</label>
+            <input type="text" id="lastname"><br>
+            <span class="span-for-errors" id="errForFullName">Please enter your full name</span>
+
+        </div>
+
+
+        <button type="button" onclick="adddata()">Submit</button>
+    </form>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>  
+    <script src="js/app.js "></script>
+</body>
+
+</html>
