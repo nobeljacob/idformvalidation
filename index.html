@@ -22,19 +22,42 @@
         </div>
 
         <div id="input-group">
-            <label for="Last Name">lastname</label>
-            <input type="text" id="lastname"><br>
+            <label for="Full Name">fullname</label>
+            <input type="text" id="fullname"><br>
             <span class="span-for-errors" id="errForFullName">Please enter your full name</span>
 
         </div>
+        <div id="input-group">
+            <label for="DOB">DOB</label>
+            <input id="DOB" type="date">
+            <span class="span-for-errors" id="errForDOB">Please enter valid Date of birth</span>
+        </div>
 
+        <div id="radio-group">
+            <label for="Reasons for issue">Reason for Issue</label>
+            <label class="container">New Employee
+            <input type="radio"  id="new" value="new" name="choice">
+               
+              </label>
+            <label class="container">Card Lost
+                <input type="radio" id="lost" value="lost" name="choice">
+               
+              </label>
+            <label class="container">Designation Change
+                <input type="radio" id="changedesi" value="changedid" name="choice"> 
+               
+              </label>
+            <label class="container">Defaced
+                <input type="radio" id="defaced" value="defaced" name="choice" >
+               
+              </label>
+            <span class="span-for-errors" id="errForButton">Please select any one button</span>
+        </div>
 
         <button type="button" onclick="adddata()">Submit</button>
     </form>
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>  
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
     <script src="js/app.js "></script>
 </body>
 

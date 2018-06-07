@@ -1,3 +1,4 @@
+var value;
 function adddata() {
     console.log('submit button clicked');
     // Check if user has entered all required data
@@ -5,8 +6,18 @@ function adddata() {
     // Else post it
     if (validateFirstName()) {
         if (validateFullName()) {
-            // Do a Post
-            postData();
+            if (validateDOB()) {
+                if (validatebutton()) {
+                    postData();
+                }
+                else {
+                    displayErrorMessageForButton();
+                }
+            }
+            else {
+                // Display error message for DOB
+                displayErrorMessageForDOB();
+            }
         }
         else {
             // Display error message for full Name
@@ -26,10 +37,15 @@ function displayErrorMessageForFirstName() {
 function displayErrorMessageForFullName() {
     $('#errForFullName').show();
 }
-
-
+function displayErrorMessageForDOB() {
+    $('#errForDOB').show();
+}
+function displayErrorMessageForButton() {
+    $('#errForButton').show();
+}
 function validateFirstName() {
     const firstName = $('#firstname').val();
+    console.log(firstname);
     if (firstName === '') {
         return false;
     }
@@ -37,33 +53,66 @@ function validateFirstName() {
 }
 
 function validateFullName() {
-    const fullName = $('#lastname').val();
+    const fullName = $('#fullname').val();
     if (fullName === '') {
         return false;
     }
     return true;
 }
 
-function postData() {
-    const data = {
-        firstName: $('#firstname').val(),
-        fullName: $('#lastname').val()
-    };
-    $.ajax({
-        type: "POST",
-        url: 'https://idformvalidation.firebaseio.com/.json',
-        data: JSON.stringify(data),
-        success: onPostSuccess,
-        // dataType: dataType
+function validateDOB() {
+    const DOB = $('#DOB').val();
+    var datetext = document.getElementById('DOB').value;
+    var selectedDate = new Date(datetext);
+    var now = new Date();
+    if (selectedDate > now) {
+        return false;
+    }
+    return true;
+}
+function validatebutton() {
+    if ($('input[name=choice]:checked').length > 0) {
+
+        var radios = document.getElementsByName("choice");
+        
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].type === 'radio' && radios[i].checked) {
+                // get value, set checked flag or do whatever you need to
+                value = radios[i].value;
+            }
+        }
+
+        return true;
+    } 
+    else 
+    {
+        return false;
+    }
+}
+
+    function postData() {
+        const data = {
+            firstName: $('#firstname').val(),
+            fullName: $('#fullname').val(),
+            DOB: $('#DOB').val(),
+            vals:value
+
+        };
+        $.ajax({
+            type: "POST",
+            url: 'https://idformvalidation.firebaseio.com/.json',
+            data: JSON.stringify(data),
+            success: onPostSuccess,
+            // dataType: dataType
+        });
+    }
+
+    const onPostSuccess = (data) => {
+        console.log('Posting to firebase success');
+        console.log(data);
+    }
+
+    $('document').ready(() => {
+        // Initialize
+        $('.span-for-errors').hide();
     });
-}
-
-const onPostSuccess = (data) => {
-    console.log('Posting to firebase success');
-    console.log(data);
-}
-
-$('document').ready(() => {
-    // Initialize
-    $('.span-for-errors').hide();
-});
